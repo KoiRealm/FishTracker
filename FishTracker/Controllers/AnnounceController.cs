@@ -1,5 +1,8 @@
 ﻿using BencodeNET.Objects;
+using FishTracker.Manager;
+using FishTracker.Models;
 using FishTracker.Models.API;
+using FishTracker.Models.Peers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FishTracker.Controllers
@@ -8,6 +11,8 @@ namespace FishTracker.Controllers
     [ApiController]
     public class AnnounceController : ControllerBase
     {
+        private readonly IBitTorrentManager _bitTorrentManager;
+
         [HttpGet("test")]
         public ContentResult GetPeersInfo(GetPeersObject getPeersObject)
         {
@@ -59,7 +64,7 @@ namespace FishTracker.Controllers
             //var startIndex = new Random().Next(total);
 
             // 判断当前 BT 客户端是否需要紧凑模式的数据。
-            if (inputParameters.IsEnableCompact)
+            if (inputParameters.IsEnableCompact) 
             {
                 var compactResponse = new byte[total * 6];
                 for (int index = 0; index < total; index++)
