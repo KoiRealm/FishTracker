@@ -8,27 +8,27 @@
         public string? Info_Hash { get; set; }
 
         /// <summary>
-        /// Client's IP Address.
+        /// An optional parameter giving the IP (or dns name) which this peer is at.
         /// </summary>
         public string? Ip { get; set; }
 
         /// <summary>
-        /// Client's randomized Peer Id.
+        /// A string of length 20 which this downloader uses as its id.
         /// </summary>
         public string? Peer_Id { get; set; }
 
         /// <summary>
-        /// Client listening port number.
+        /// The port number this peer is listening on.
         /// </summary>
         public int Port { get; set; }
 
         /// <summary>
-        /// Uploaded file size.
+        /// The total amount uploaded so far, encoded in base ten ascii.
         /// </summary>
         public long Uploaded { get; set; }
 
         /// <summary>
-        /// Downloaded file size.
+        /// The total amount downloaded so far, encoded in base ten ascii.
         /// </summary>
         public long Downloaded { get; set; }
 
@@ -38,7 +38,7 @@
         public string? Event { get; set; }
 
         /// <summary>
-        /// The size of the file that client left.
+        /// The number of bytes this peer still has to download, encoded in base ten ascii.
         /// </summary>
         public long Left { get; set; }
 
