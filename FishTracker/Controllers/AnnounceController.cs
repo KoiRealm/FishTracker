@@ -11,13 +11,13 @@ namespace FishTracker.Controllers
     [ApiController]
     public class AnnounceController : ControllerBase
     {
-        private readonly IBitTorrentManager _bitTorrentManager;
+        private readonly IBitTorrentManager? _bitTorrentManager;
 
         [HttpGet("test")]
         public ContentResult GetPeersInfo(GetPeersObject getPeersObject)
         {
             // 如果 BT 客户端没有传递 IP，则通过 Context 获得。
-            if (string.IsNullOrEmpty(getPeersObject.Ip)) getPeersObject.Ip = HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString(); ;
+            if (string.IsNullOrEmpty(getPeersObject.Ip)) getPeersObject.Ip = HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
 
             // 本机测试用。
             getPeersObject.Ip = "127.0.0.1";
