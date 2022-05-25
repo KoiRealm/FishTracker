@@ -20,7 +20,7 @@ namespace FishTracker.Controllers
         }
 
         [HttpGet("test")]
-        public ContentResult GetPeersInfo([FromQuery]GetPeersObject getPeersObject)
+        public FileContentResult GetPeersInfo([FromQuery]GetPeersObject getPeersObject)
         {
             // 如果 BT 客户端没有传递 IP，则通过 Context 获得。
             if (string.IsNullOrEmpty(getPeersObject.Ip)) getPeersObject.Ip = HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
@@ -58,7 +58,7 @@ namespace FishTracker.Controllers
             }
 
             // 写入响应结果。
-            return Content(resultDict.EncodeAsString());
+            return File(resultDict.EncodeAsBytes(),"text/plain");
         }
 
         /// <summary>
