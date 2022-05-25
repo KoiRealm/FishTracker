@@ -13,6 +13,12 @@ namespace FishTracker.Controllers
     {
         private readonly IBitTorrentManager? _bitTorrentManager;
 
+
+        public AnnounceController( IBitTorrentManager bitTorrentManager)
+        {
+            _bitTorrentManager = bitTorrentManager;
+        }
+
         [HttpGet("test")]
         public ContentResult GetPeersInfo([FromQuery]GetPeersObject getPeersObject)
         {
