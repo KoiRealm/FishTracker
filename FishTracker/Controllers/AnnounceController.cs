@@ -14,7 +14,7 @@ namespace FishTracker.Controllers
         private readonly IBitTorrentManager? _bitTorrentManager;
 
         [HttpGet("test")]
-        public ContentResult GetPeersInfo(GetPeersObject getPeersObject)
+        public ContentResult GetPeersInfo([FromQuery]GetPeersObject getPeersObject)
         {
             // 如果 BT 客户端没有传递 IP，则通过 Context 获得。
             if (string.IsNullOrEmpty(getPeersObject.Ip)) getPeersObject.Ip = HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
