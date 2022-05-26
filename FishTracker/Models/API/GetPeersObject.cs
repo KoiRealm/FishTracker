@@ -18,17 +18,17 @@
         public string? Peer_Id { get; set; }
 
         /// <summary>
-        /// The port number this peer is listening on.
+        /// Port number this peer is listening on.
         /// </summary>
         public int Port { get; set; }
 
         /// <summary>
-        /// The total amount uploaded so far, encoded in base ten ascii.
+        /// Total amount uploaded so far, encoded in base ten ascii.
         /// </summary>
         public long Uploaded { get; set; }
 
         /// <summary>
-        /// The total amount downloaded so far, encoded in base ten ascii.
+        /// Total amount downloaded so far, encoded in base ten ascii.
         /// </summary>
         public long Downloaded { get; set; }
 
@@ -38,7 +38,7 @@
         public string? Event { get; set; }
 
         /// <summary>
-        /// The number of bytes this peer still has to download, encoded in base ten ascii.
+        /// Number of bytes this peer still has to download, encoded in base ten ascii.
         /// </summary>
         public long Left { get; set; }
 
@@ -48,7 +48,7 @@
         public int Compact { get; set; }
 
         /// <summary>
-        /// The Peer amount that client intend to get.
+        /// Peer amount that client intend to get.
         /// </summary>
         public int? NumWant { get; set; }
     }
