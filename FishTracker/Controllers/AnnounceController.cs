@@ -26,7 +26,7 @@ namespace FishTracker.Controllers
             if (string.IsNullOrEmpty(getPeersObject.Ip)) getPeersObject.Ip = HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
 
             // 本机测试用。
-            getPeersObject.Ip = "127.0.0.1";
+            //getPeersObject.Ip = "127.0.0.1";
 
             AnnounceInputParameters inputPara = getPeersObject;
             var resultDict = new BDictionary();
@@ -66,6 +66,7 @@ namespace FishTracker.Controllers
         /// </summary>
         private void HandlePeersData(BDictionary resultDict, IReadOnlyList<Peer> peers, AnnounceInputParameters inputParameters)
         {
+
             var total = Math.Min(peers.Count, inputParameters.PeerWantCount);
             //var startIndex = new Random().Next(total);
 
