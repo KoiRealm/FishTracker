@@ -22,16 +22,13 @@ namespace FishTracker.Controllers
         [HttpGet("test")]
         public FileContentResult GetPeersInfo([FromQuery]GetPeersObject getPeersObject)
         {
-            // 如果 BT 客户端没有传递 IP，则通过 Context 获得。
+            // Get IP address from Context If client doesn't tell theirs.
             if (string.IsNullOrEmpty(getPeersObject.Ip)) getPeersObject.Ip = HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
-
-            // 本机测试用。
-            //getPeersObject.Ip = "127.0.0.1";
 
             AnnounceInputParameters inputPara = getPeersObject;
             var resultDict = new BDictionary();
 
-            // 如果产生了错误，则不执行其他操作，直接返回结果。
+            // According to BitTorrent Protocol, detail message will be returned directly if error occurs.
             if (inputPara.Error.Count == 0)
             {
                 _bitTorrentManager.UpdatePeer(getPeersObject.Info_Hash, inputPara);
@@ -39,17 +36,15 @@ namespace FishTracker.Controllers
                 var peers = _bitTorrentManager.GetPeers(getPeersObject.Info_Hash);
 
                 HandlePeersData(resultDict, peers, inputPara);
-
-                // 构建剩余字段信息
-                // 客户端等待时间
+                // Client's waiting interval.
                 resultDict.Add(TrackerServerConsts.IntervalKey, new BNumber((int)TimeSpan.FromSeconds(30).TotalSeconds));
-                // 最小等待间隔
+                // Client's minimal waiting interval.
                 resultDict.Add(TrackerServerConsts.MinIntervalKey, new BNumber((int)TimeSpan.FromSeconds(30).TotalSeconds));
-                // Tracker 服务器的 Id
-                resultDict.Add(TrackerServerConsts.TrackerIdKey, new BString("Tracker-DEMO"));
-                // 已完成的 Peer 数量
+                // Tracker Server's identity.
+                resultDict.Add(TrackerServerConsts.TrackerIdKey, new BString("FishTracker"));
+                // Completed peers count.
                 resultDict.Add(TrackerServerConsts.CompleteKey, new BNumber(_bitTorrentManager.GetComplete(getPeersObject.Info_Hash)));
-                // 非做种状态的 Peer 数量
+                // Incompleted peers count.
                 resultDict.Add(TrackerServerConsts.IncompleteKey, new BNumber(_bitTorrentManager.GetInComplete(getPeersObject.Info_Hash)));
             }
             else
@@ -57,20 +52,19 @@ namespace FishTracker.Controllers
                 resultDict = inputPara.Error;
             }
 
-            // 写入响应结果。
+            // Return "Content-Type:text/plain" by using File()
             return File(resultDict.EncodeAsBytes(),"text/plain");
         }
 
         /// <summary>
-        /// 将 Peer 集合的数据转换为 BT 协议规定的格式
+        /// Transform peers collection into result BDictionary.
         /// </summary>
         private void HandlePeersData(BDictionary resultDict, IReadOnlyList<Peer> peers, AnnounceInputParameters inputParameters)
         {
 
             var total = Math.Min(peers.Count, inputParameters.PeerWantCount);
-            //var startIndex = new Random().Next(total);
 
-            // 判断当前 BT 客户端是否需要紧凑模式的数据。
+            // Check if BT client need to enable compact mode.
             if (inputParameters.IsEnableCompact) 
             {
                 var compactResponse = new byte[total * 6];

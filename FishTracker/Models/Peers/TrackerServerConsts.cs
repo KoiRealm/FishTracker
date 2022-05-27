@@ -7,16 +7,16 @@ namespace FishTracker.Models.Peers
     /// </summary>
     public static class TrackerServerConsts
     {
-        public static readonly BString PeerIdKey = new BString("peer id");
-        public static readonly BString PeersKey = new BString("peers");
-        public static readonly BString IntervalKey = new BString("interval");
-        public static readonly BString MinIntervalKey = new BString("min interval");
-        public static readonly BString TrackerIdKey = new BString("tracker id");
-        public static readonly BString CompleteKey = new BString("complete");
-        public static readonly BString IncompleteKey = new BString("incomplete");
+        public static readonly BString PeerIdKey = new("peer id");
+        public static readonly BString PeersKey = new("peers");
+        public static readonly BString IntervalKey = new("interval");
+        public static readonly BString MinIntervalKey = new("min interval");
+        public static readonly BString TrackerIdKey = new("tracker id");
+        public static readonly BString CompleteKey = new("complete");
+        public static readonly BString IncompleteKey = new("incomplete");
 
-        public static readonly BString Port = new BString("port");
-        public static readonly BString Ip = new BString("ip");
+        public static readonly BString Port = new("port");
+        public static readonly BString Ip = new("ip");
 
         public static readonly string FailureKey = "failure reason";
     }

@@ -87,7 +87,7 @@ namespace FishTracker.Manager
 
         public int GetComplete(string infoHash)
         {
-            if (_bitTorrentStatus.TryGetValue(infoHash, out BitTorrentStatus status))
+            if (_bitTorrentStatus.TryGetValue(infoHash, out BitTorrentStatus? status))
             {
                 return status.Completed;
             }
@@ -97,7 +97,7 @@ namespace FishTracker.Manager
 
         public int GetInComplete(string infoHash)
         {
-            if (_bitTorrentStatus.TryGetValue(infoHash, out BitTorrentStatus status))
+            if (_bitTorrentStatus.TryGetValue(infoHash, out BitTorrentStatus? status))
             {
                 return status.InCompleted;
             }
