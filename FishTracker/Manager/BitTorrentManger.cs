@@ -51,7 +51,7 @@ namespace FishTracker.Manager
             if (!_peers.ContainsKey(inputParameters.InfoHash)) _peers.TryAdd(infoHash, new List<Peer>());
             if (!_bitTorrentStatus.ContainsKey(inputParameters.InfoHash)) _bitTorrentStatus.TryAdd(infoHash, new BitTorrentStatus());
 
-            // 如果 Peer 不存在则添加，否则更新其状态。
+            // Add Peers if not exists.
             var peers = _peers[infoHash];
             var peer = peers.FirstOrDefault(p => p.UniqueId == inputParameters.PeerId);
             if (peer == null)
@@ -63,7 +63,6 @@ namespace FishTracker.Manager
                 peer.UpdateStatus(inputParameters);
             }
 
-            // 根据事件更新种子状态与 Peer 信息。
             if (inputParameters.Event == TorrentEvent.Stopped) DeletePeer(infoHash, inputParameters);
             if (inputParameters.Event == TorrentEvent.Completed) _bitTorrentStatus[infoHash].Downloaded++;
 
