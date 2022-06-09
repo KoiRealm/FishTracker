@@ -3,22 +3,22 @@
 namespace FishTracker.Models.Peers
 {
     /// <summary>
-    /// 用于表示某个种子的状态与统计信息。
+    /// The status about BitTorrent
     /// </summary>
     public class BitTorrentStatus
     {
         /// <summary>
-        /// 下载完成的 Peer 数量。
+        /// Downloaded Peers count.
         /// </summary>
         public BNumber Downloaded { get; set; }
 
         /// <summary>
-        /// 已经完成种子下载的 Peer 数量。
+        /// Completed Peers download count.
         /// </summary>
         public BNumber Completed { get; set; }
 
         /// <summary>
-        /// 正在下载种子的 Peer 数量。
+        /// Downloading Peers count.
         /// </summary>
         public BNumber InCompleted { get; set; }
 
