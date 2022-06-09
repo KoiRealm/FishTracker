@@ -105,14 +105,13 @@ namespace FishTracker.Manager
         }
 
         /// <summary>
-        /// 更新种子的统计信息。
+        /// Update Peers Status
         /// </summary>
         private void UpdateBitTorrentStatus(string infoHash)
         {
             if (!_peers.ContainsKey(infoHash)) return;
             if (!_bitTorrentStatus.ContainsKey(infoHash)) return;
 
-            // 遍历种子所有的 Peer 状态，对种子统计信息进行处理。
             int complete = 0, incomplete = 0;
             var peers = _peers[infoHash];
             foreach (var peer in peers)
