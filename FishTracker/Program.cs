@@ -17,12 +17,12 @@ builder.Services.AddQuartz(q =>
     // base quartz scheduler, job and trigger configuration
 });
 
-// ASP.NET Core hosting
-builder.Services.AddQuartzServer(options =>
-{
-    // when shutting down we want jobs to complete gracefully
-    options.WaitForJobsToComplete = true;
-});
+//// ASP.NET Core hosting
+//builder.Services.AddQuartzServer(options =>
+//{
+//    // when shutting down we want jobs to complete gracefully
+//    options.WaitForJobsToComplete = true;
+//});
 
 var app = builder.Build();
 
