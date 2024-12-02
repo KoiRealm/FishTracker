@@ -52,6 +52,8 @@ namespace FishTracker.Controllers
                 resultDict = inputPara.Error;
             }
 
+            //Console.WriteLine($"{_bitTorrentManager.}");
+
             // Return "Content-Type:text/plain" by using File()
             return File(resultDict.EncodeAsBytes(),"text/plain");
         }
